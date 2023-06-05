@@ -6,7 +6,19 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { HomeComponent } from './home/home.component';
 import { FooterComponent } from './footer/footer.component';
-import { SidebarComponent } from './sidebar/sidebar.component';
+import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
+import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
+import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NewBillComponent } from './new-bill/new-bill.component';
+import { ReturnBillComponent } from './return-bill/return-bill.component';
+import { EditBillComponent } from './edit-bill/edit-bill.component';
+import { ViewAllBillsComponent } from './view-all-bills/view-all-bills.component';
+import { InventoryComponent } from './inventory/inventory.component';
+
+const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
+  suppressScrollX: true
+};
 
 @NgModule({
   declarations: [
@@ -14,13 +26,23 @@ import { SidebarComponent } from './sidebar/sidebar.component';
     NavbarComponent,
     HomeComponent,
     FooterComponent,
-    SidebarComponent
+    NewBillComponent,
+    ReturnBillComponent,
+    EditBillComponent,
+    ViewAllBillsComponent,
+    InventoryComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgbModule,
   ],
-  providers: [],
+  providers: [  
+    {
+    provide: PERFECT_SCROLLBAR_CONFIG,
+    useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
+  }
+],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
