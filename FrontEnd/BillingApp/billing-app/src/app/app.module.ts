@@ -15,6 +15,7 @@ import { ReturnBillComponent } from './return-bill/return-bill.component';
 import { EditBillComponent } from './edit-bill/edit-bill.component';
 import { ViewAllBillsComponent } from './view-all-bills/view-all-bills.component';
 import { InventoryComponent } from './inventory/inventory.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -31,6 +32,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     EditBillComponent,
     ViewAllBillsComponent,
     InventoryComponent,
+    SidebarComponent,
   ],
   imports: [
     BrowserModule,

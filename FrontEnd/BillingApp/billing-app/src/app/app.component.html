@@ -1,7 +1,13 @@
+<app-navbar style="position: -webkit-sticky; position: sticky; top: 0; z-index: 1;"></app-navbar>
+<div class="d-flex" id="body-row">
+    <div class="d-flex justify-content-start">
+        <app-sidebar
+            style="position: -webkit-sticky; position: sticky;"></app-sidebar>
+    </div>
+    <div class="flex-grow-1 ms-3">
+        <h1>{{title}}</h1>
 
-<app-navbar></app-navbar>
-<h1>{{title}}</h1>
-
-<router-outlet></router-outlet>
-
+        <router-outlet></router-outlet>
+    </div>
+</div>
 <app-footer></app-footer>
