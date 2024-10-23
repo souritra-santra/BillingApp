@@ -37,7 +37,9 @@ public class ProductService {
 		productRepo.delete(product);
 	}
 	
-	
+//	public void updateProduct(Product product) {
+//		productRepo.
+//	}
 	
 
 }

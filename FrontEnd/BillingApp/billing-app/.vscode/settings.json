@@ -1,0 +1,33 @@
+{
+    "sqltools.connections": [
+        {
+            "mysqlOptions": {
+                "authProtocol": "default",
+                "enableSsl": "Disabled"
+            },
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 3306,
+            "driver": "MySQL",
+            "name": "db",
+            "database": "billing-app-database",
+            "username": "billing-app-user",
+            "password": "demopass",
+            "connectionTimeout": 60
+        },
+        {
+            "mysqlOptions": {
+                "authProtocol": "default",
+                "enableSsl": "Disabled"
+            },
+            "previewLimit": 50,
+            "server": "172.16.189.129",
+            "port": 3306,
+            "driver": "MySQL",
+            "name": "db1",
+            "database": "billing",
+            "username": "root",
+            "password": "demopass"
+        }
+    ]
+}

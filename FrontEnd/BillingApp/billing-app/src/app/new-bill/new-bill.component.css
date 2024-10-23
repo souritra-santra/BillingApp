@@ -1,0 +1,31 @@
+.example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+  }
+  
+  .example-full-width {
+    width: 100%;
+  }
+
+  ul{
+    list-style: none;
+    /* padding-left: 0 !important;
+    border: 1px solid rgba(0, 0, 0, 0.814);
+    border-radius: 0px 0px 5px 5px; */
+  }
+  .list{
+    width: 100%;
+    background-color:ghostwhite;
+    padding-left: 0 !important;
+    border: 1px solid rgba(0, 0, 0, 0.814);
+    border-top: 0px;
+    border-radius: 0px 0px 5px 5px;
+  }
+  .list-items{
+    padding: 12px 5px;
+
+    &:hover{
+        background-color: antiquewhite;
+    }
+  }

@@ -14,6 +14,7 @@ public class Product {
 	private String name;
 	private long price;
 	private String type;
+	private String size;
 	@ManyToOne
 	private Bill bill;
 	
@@ -27,12 +28,13 @@ public class Product {
 
 	protected Product() {}
 	
-	public Product(long id, String name, long price, String type) {
+	public Product(long id, String name, long price, String type, String size) {
 		super();
 		this.productId = id;
 		this.name = name;
 		this.price = price;
 		this.type = type;
+		this.size = size;
 	}
 
 
@@ -75,7 +77,13 @@ public class Product {
 		this.type = type;
 	}
 
+	public String getSize() {
+		return size;
+	}
 
+	public void setSize(String size) {
+		this.size = size;
+	}
 	@Override
 	public String toString() {
 		return "Product [productId=" + productId + ", name=" + name + ", price=" + price + ", type=" + type + "]";

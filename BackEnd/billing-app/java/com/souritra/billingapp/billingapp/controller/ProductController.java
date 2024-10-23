@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,6 +19,7 @@ import com.souritra.billingapp.billingapp.exception.UserNotFoundException;
 import com.souritra.billingapp.billingapp.service.ProductService;
 
 @RestController
+@CrossOrigin("*")
 public class ProductController {
 	
 	@Autowired
@@ -41,7 +43,7 @@ public class ProductController {
 		return product.get();
 	}
 	
-	@PostMapping("/product/add")
+	@PostMapping("/products/add")
 	public ResponseEntity<Product> addProduct(@RequestBody Product product){
 		
 		productService.addProduct(product);

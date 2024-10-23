@@ -3,8 +3,9 @@
     min-height: 90vh ;   
     background-color: rgba(0, 0, 0, 0.857);
     padding: 0;
+    position: -webkit-sticky;
     position: sticky;
-    top: 5%;
+    top: 10%;
 }
 
 /* Sidebar sizes when expanded and expanded */
