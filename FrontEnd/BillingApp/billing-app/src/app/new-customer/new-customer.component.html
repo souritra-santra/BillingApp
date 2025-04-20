@@ -1,0 +1,40 @@
+<h3>Add New Customer</h3>
+<div class="card text-start add-card">
+    <div class="card-body">
+        <h6>Customer Details</h6>
+        <form class="row" [formGroup]="billForm">
+            <div class="col-xs-12 col-sm-12 col-md-3 mb-3">
+                <label class="bill-label">Name</label>
+                <input class="bill-input" type="text" formControlName="name">
+                <!-- <ul *ngIf="billForm.value.name && !userSelected" class="list">
+                    <li *ngIf="filteredOptions.length==0" class="list-items">No matched Customer</li>
+                    <li (click)="selectName(item)" class="list-items" *ngFor="let item of filteredOptions">{{item.name}} - {{item.mobileNoString}} <br> {{item.address}}</li>
+                </ul> -->
+            </div>
+            
+            <div class="col-xs-12 col-sm-12 col-md-3 mb-3">
+                <label class="bill-label">Mobile No.</label>
+                <input class="bill-input" type="text" formControlName="mobile">
+                <!-- <ul *ngIf="billForm.value.mobile && !userSelected" class="list">
+                    <li *ngIf="filteredOptions.length==0" class="list-items">No matched Customer</li>
+                    <li (click)="selectName(item)" class="list-items" *ngFor="let item of filteredOptions">{{item.name}} - {{item.mobileNoString}} <br> {{item.address}}</li>
+                </ul> -->
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-3 mb-3">
+                <label class="bill-label">Address</label>
+                <input class="bill-input" type="text" formControlName="address">
+                <!-- <ul *ngIf="billForm.value.address && !userSelected" class="list">
+                    <li *ngIf="filteredOptions.length==0" class="list-items">No matched Customer</li>
+                    <li (click)="selectName(item)" class="list-items" *ngFor="let item of filteredOptions">{{item.name}} - {{item.mobileNoString}} <br> {{item.address}}</li>
+                </ul> -->
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-3 mt-4">
+            <button class="bill-pm-bt" type="button" (click)="addCustomer()">Add Customer</button>
+            </div>
+        </form>
+        <!-- <div class="align-items-end">
+        <button class="bill-pm-bt" type="button" (click)="save()">Save</button>
+    </div> -->
+    </div>
+
+</div>

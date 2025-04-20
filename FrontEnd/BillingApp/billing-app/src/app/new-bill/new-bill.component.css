@@ -29,3 +29,8 @@
         background-color: antiquewhite;
     }
   }
+
+  .table-prv-btn{
+    display: block !important;
+    text-align: right !important;
+  }

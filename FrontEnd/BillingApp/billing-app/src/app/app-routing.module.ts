@@ -8,6 +8,7 @@ import { ViewAllBillsComponent } from './view-all-bills/view-all-bills.component
 import { InventoryComponent } from './inventory/inventory.component';
 import { AddProductComponent } from './add-product/add-product.component';
 import { CustomerComponent } from './customer/customer.component';
+import { NewCustomerComponent } from './new-customer/new-customer.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -17,7 +18,8 @@ const routes: Routes = [
   { path: 'bill/view', component: ViewAllBillsComponent },
   { path: 'inventory', component: InventoryComponent },
   { path: 'inventory/addProduct', component: AddProductComponent },
-  { path: 'customer', component: CustomerComponent  }
+  { path: 'customer', component: CustomerComponent  },
+  { path: 'customer/new', component: NewCustomerComponent  }
 
     // { path: '**', component: PageNotFoundComponent },  // Wildcard route for a 404 page
 ];

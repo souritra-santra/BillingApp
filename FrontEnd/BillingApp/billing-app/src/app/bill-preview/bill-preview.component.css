@@ -1,0 +1,15 @@
+.bill-preview{
+    width: 70%;
+    min-height: 90vh;
+    float: right;
+    align-items: center;
+    p,h5{
+        text-align: center;
+        margin-bottom: -0.25rem !important;
+    }
+}
+
+.bt-dashed{
+    border-bottom: dashed;
+    width: 98%;
+}

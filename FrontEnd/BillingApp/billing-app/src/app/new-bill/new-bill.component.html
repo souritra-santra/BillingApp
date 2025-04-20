@@ -28,7 +28,7 @@
                     <li (click)="selectName(item)" class="list-items" *ngFor="let item of filteredOptions">{{item.name}} - {{item.mobileNoString}} <br> {{item.address}}</li>
                 </ul>
             </div>
-            <div class="col-xs-12 col-sm-12 col-md-3 mb-3">
+            <div class="col-xs-12 col-sm-12 col-md-3 mt-4">
             <button *ngIf="!userSelected" class="bill-pm-bt" type="button" (click)="addCustomer()">Add Customer</button>
             </div>
         </form>
@@ -44,7 +44,7 @@
             <div class="col-xs-12 col-sm-12 col-md-6 mb-3">
                 <label class="bill-label">Product Id/Name</label>
                 <input class="bill-input" type="text" formControlName="prodIdName">
-                <ul *ngIf="billForm.value.prodIdName" class="list">
+                <ul *ngIf="billForm.value.prodIdName && !selectedProduct" class="list">
                     <li *ngIf="prodFilteredOptions.length==0" class="list-items">No matched Product</li>
                     <li (click)="selectProduct(item)" class="list-items" *ngFor="let item of prodFilteredOptions">{{item.productId}} - {{item.name}}</li>
                 </ul>
@@ -53,8 +53,8 @@
                 <label class="bill-label">Quantity</label>
                 <input class="bill-input" type="number" min="1" value="1" formControlName="quantity">
             </div>
-            <div class="col-xs-12 col-sm-12 col-md-3 mb-3">
-                <button *ngIf="!userSelected" class="bill-pm-bt" type="button" (click)="addToBill()">Add to bill</button>
+            <div class="col-xs-12 col-sm-12 col-md-3 mt-4">
+                <button  class="bill-pm-bt" type="button" (click)="addToBill()">Add to bill</button>
             </div>
         </form>
     </div>
@@ -67,14 +67,14 @@
                 <table id="datatable" data-toggle="data-table" class="table mb-0">
                     <thead>
                         <tr class="bg-white">
-                            <th scope="col" class="align-items-center" *ngFor="let row of colomns">{{row.name}}</th>
-
+                            <th scope="col" class="align-items-center" *ngFor="let row of colomns">{{row.name!='Remove'?row.name:""}}</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr *ngFor="let element of data; let i = index">
-                            <th *ngFor="let row of colomns">
-                                <span>{{row.key!='sln'?element[row.key]:i+1}}</span>
+                            <td *ngFor="let row of colomns">
+                                <span *ngIf="row.key!='del'">{{row.key!='sln'?element[row.key]:i+1}}</span>
+                                <span *ngIf="row.key=='del'"><i class="fas fa-trash me-1" (click)="remove(i)"></i></span>
 
                                 <!-- <div *ngIf="row.key=='action'" class="d-flex justify-content-start">
                                     <a href="#" role="button"
@@ -105,11 +105,21 @@
                                                     fill="currentColor"></path>
                                             </svg></span></a>
                                 </div> -->
-                            </th>
+                            </td>
                         </tr>
                     </tbody>
+                    <tfoot *ngIf="data.length>0">
+                        <tr>
+                            <th *ngFor="let row of colomns">
+                                <span *ngIf="row.footer">{{getDynamicValue(row.footer)!==false?getDynamicValue(row.footer):row.footer}}</span>
+                            </th>
+                        </tr>
+                    </tfoot>
                 </table>
             </div>
+        </div>
+        <div class="table-prv-btn mb-2 me-2">
+            <button  class="bill-pm-bt" type="button" (click)="preview()">Preview and Payment</button>
         </div>
     <!-- </div> -->
 </div>
