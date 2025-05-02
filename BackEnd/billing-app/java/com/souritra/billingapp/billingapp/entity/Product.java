@@ -2,6 +2,8 @@ package com.souritra.billingapp.billingapp.entity;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -18,6 +20,7 @@ public class Product {
 	private String type;
 	private String size;
 	@OneToMany(mappedBy = "product")
+	@JsonManagedReference("product-billedProduct")
 	private List<BilledProduct> billedProduct;
 
 	protected Product() {

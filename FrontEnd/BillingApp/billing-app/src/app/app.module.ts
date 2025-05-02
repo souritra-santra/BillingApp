@@ -27,7 +27,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import { CustomerComponent } from './customer/customer.component';
 import { NewCustomerComponent } from './new-customer/new-customer.component';
 import { BillPreviewComponent } from './bill-preview/bill-preview.component';
-
+import { AlertPopupComponent } from './alert-popup/alert-popup.component';
+import { BarcodeComponent } from './barcode/barcode.component';
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
 };
@@ -48,6 +49,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     CustomerComponent,
     NewCustomerComponent,
     BillPreviewComponent,
+    AlertPopupComponent,
+    BarcodeComponent,
   ],
   imports: [
     MatDialogModule,

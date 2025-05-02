@@ -20,7 +20,9 @@ export class BillServiceService {
    url_getAllProduct = environment.apihost + configUrl.bill.getAllBill;
    url_getAddCustomer = environment.apihost + configUrl.bill.addCustomer;
    url_getAllCustomer= environment.apihost + configUrl.bill.getAllCustomer;
-   
+   url_addDraftedBill= environment.apihost + configUrl.bill.addDraftBill;
+   url_addBillComplete= environment.apihost + configUrl.bill.addBillComplete;
+
 
    addCustomer(obj:any){
     return this.http.post(this.url_getAddCustomer,obj);
@@ -30,6 +32,12 @@ export class BillServiceService {
    }
    getAllBill(obj:any){
     return this.http.post(this.url_getAllProduct,obj);
+   }
+   addDraftedBill(obj:any){
+    return this.http.post(this.url_addDraftedBill,obj);
+   }
+   addBillComplete(obj:any){
+    return this.http.post(this.url_addBillComplete,obj);
    }
 }
  

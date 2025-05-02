@@ -3,7 +3,43 @@
         <h4>Bill Preview</h4>
     </div>
     <div class="bill-card">
-        <div class="card bill-preview me-2">
+        <div class="card bill-payment">
+            <form [formGroup]="billForm">
+
+                <h6>Payment Details </h6>
+                <div class="mb-2">
+                <label class="bill-label">Discounted Total </label>
+                <input class="bill-input" type="number" min="0" formControlName="disTotal" (change)="disChange('T')">
+            </div>
+            <div class="mb-2">
+                <label class="bill-label">Discount(%) </label>
+                <input class="bill-input" type="number" min="0" max="100" formControlName="discount" (change)="disChange('P')">
+            </div>
+            <div class="mb-2">
+                <label class="bill-label">Paid Amount </label>
+                <input class="bill-input" type="number" min="0" max="billForm.value.disTotal" formControlName="paidAmt"
+                    (change)="dueChange('P')">
+                </div>
+                <div class="mb-2">
+                <label class="bill-label">Due Amount </label>
+                <input class="bill-input" type="number" min="0" max="billForm.value.disTotal" formControlName="dueAmt"
+                    (change)="dueChange('D')">
+                </div>
+                <div class="mb-2">
+                <label class="bill-label">Payment Mode </label>
+                <ul>
+                    <li><input type="radio" name="payment" id="Cash" value="Cash" (change)="payment('Cash')"> Cash</li>
+                    <li><input type="radio" name="payment" id="UPI" value="UPI" (change)="payment('UPI')"> UPI</li>
+                    <li><input type="radio" name="payment" id="Card" value="Card" (change)="payment('Card')"> Card</li>
+                </ul>
+                </div>
+            </form>
+            <div class="bill-prv-btn mb-2 me-2">
+                <button class="bill-pm-bt me-2" type="button" (click)="save('S')">Save</button>
+                <button class="bill-pm-bt" type="button" (click)="save('P')">Save and Print</button>
+            </div>
+        </div>
+        <div id="printable-content" class="card bill-preview">
             <div class="bill-preview-header bt-dashed mt-2">
                 <h5>Rajlakshmi Bastralaya</h5>
                 <p>Maheshwarpur, Tamila,</p>
@@ -13,22 +49,100 @@
             <div class="bill-preview-header bt-dashed mt-2 mb-2">
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-8">
-                        <label>Customer name : {{data?.customerDet?.name}}</label>
+                        <label>Customer name : {{customer?.name}}</label>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-4">
-                        <label>Bill dt : </label>
+                        <label>Bill dt : {{billingtime}}</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-8">
-                        <label>Customer Address : {{data?.customerDet?.address}}</label>
+                        <label>Customer Address : {{customer?.address}}</label>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-4">
-                        <label>Bill no : </label>
+                        <label>Bill no : {{bill?.billNo}}</label>
                     </div>
                 </div>
+            </div>
+
+            <div class="preview-table bt-dashed mb-2">
+                <table id="datatable" data-toggle="data-table" class="table mb-0">
+                    <thead>
+                        <tr class="bg-white">
+                            <th scope="col" class="align-items-center" *ngFor="let row of colomns">{{row.name}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let element of datasource; let i = index">
+                            <td *ngFor="let row of colomns">
+                                <span>{{row.key!='sln'?element[row.key]:i+1}}</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tfoot *ngIf="datasource.length>0">
+                        <tr>
+                            <th *ngFor="let row of colomns">
+                                <span
+                                    *ngIf="row.footer">{{getDynamicValue(row.footer)!==false?getDynamicValue(row.footer):row.footer}}</span>
+                            </th>
+                        </tr>
+                    </tfoot>
+                </table>
+
+            </div>
+            <div class="bill-preview-header payment-preview bt-dashed mb-2">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-3">
+                        <label *ngIf="billForm.value.discount>0">Discount :</label>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-3">
+                        <label *ngIf="billForm.value.discount>0">{{billForm.value.discount}}%</label>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-3">
+                        <label>{{billForm.value.discount>0?"Discounted":""}} Total :</label>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-3 text-end">
+                        <label>{{billForm.value.disTotal}}</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-3">
+                        <label *ngIf="paymentMode">Payment Mode :</label>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-3">
+                        <label *ngIf="paymentMode">{{paymentMode}}</label>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-3">
+                        <label>Paid Amount :</label>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-3 text-end">
+                        <label>{{billForm.value.paidAmt}}</label>
+                    </div>
+                </div>
+                <div class="row" *ngIf="billForm.value.dueAmt>0">
+                    <div class="col-xs-12 col-sm-12 col-md-3">
+                        <label>Due added to :</label>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-3">
+                        <label>{{customer?.name}}</label>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-3">
+                        <label>Due Amount :</label>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-3 text-end">
+                        <label>{{billForm.value.dueAmt}}</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bill-preview-header bill-barcode bt-dashed mb-2">
+                <app-barcode [barcodeValue]="bill?.billNo"></app-barcode>
+            </div>
+            <div class="bill-preview-header mb-2">
+                <p>Thanks for shoping. Visit again.</p>
             </div>
         </div>
 
     </div>
+
 </div>

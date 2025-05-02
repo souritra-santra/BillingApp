@@ -33,7 +33,7 @@ export class NewBillComponent implements OnInit {
     { name: "Product ID", key: "productId" },
     { name: "Name", key: "name" },
     { name: "Quantity", key: "quantity", footer: "totalQty" },
-    { name: "Rate", key: "rate" },
+    { name: "Rate", key: "price" },
     { name: "Value", key: "value", footer: "totalVal" },
     { name: "Remove", key: "del" }
   ]
@@ -169,7 +169,7 @@ export class NewBillComponent implements OnInit {
       productId: this.selectedProduct.productId,
       name: this.selectedProduct.name,
       quantity: this.billForm.value.quantity ? this.billForm.value.quantity : 1,
-      rate: this.selectedProduct.price,
+      price: this.selectedProduct.price,
       value: parseFloat(this.selectedProduct.price) * (this.billForm.value.quantity ? this.billForm.value.quantity : 1)
     });
   }
@@ -197,24 +197,40 @@ export class NewBillComponent implements OnInit {
     let obj = this.data[i];
     if(obj.quantity > 1){
       obj.quantity--;
-      obj.value = parseFloat(obj.rate) * obj.quantity;
+      obj.value = parseFloat(obj.price) * obj.quantity;
     }else{
       this.data = this.data.filter(option=>obj.productId !== option.productId);
     }
     this.totalCalculation();
   }
   preview(){
-let previewDialog = this.dialog.open(BillPreviewComponent,{
-  panelClass: 'preview-dialog',
-  data:{
-    formValue : this.billForm.value,
-    customerDet: this.selectedCustomer,
-    colomns: this.colomns,
-    billData : this.data,
-    totalQty: this.totalQty,
-    totalVal : this.totalVal
-  }
-})
+    const obj = {
+      customer: this.selectedCustomer,
+      status: "D",
+      billingDtTime: Date.now(),
+      totalQty: this.totalQty,
+      total: this.totalVal,
+      products: this.data
+    };
+    
+    this.service.addDraftedBill(obj)
+      .pipe(takeUntil(this.endsubs$))
+      .subscribe(res => {
+        let previewDialog = this.dialog.open(BillPreviewComponent,{
+          panelClass: 'preview-dialog',
+          data:{
+            formValue : this.billForm.value,
+            customerDet: this.selectedCustomer,
+            colomns: this.colomns,
+            billData : this.data,
+            totalQty: this.totalQty,
+            totalVal : this.totalVal,
+            result: res
+          }
+        });
+
+      });
+
   }
   save() {
     console.log(this.billForm);

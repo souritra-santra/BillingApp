@@ -9,7 +9,8 @@ bill:{
     addCustomer:"/customer/add",
     getAllCustomer: "/customers",
     getAllBill:"",
-    addBill:""
+    addDraftBill:"/bill/addDraftBill",
+    addBillComplete:"/bill/addBillComplete"
 },
 
 customer:{

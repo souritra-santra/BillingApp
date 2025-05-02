@@ -1,38 +1,52 @@
 package com.souritra.billingapp.billingapp.entity;
 
-import java.util.Date;
+import java.sql.Timestamp;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import lombok.Data;
 
+@Data
 @Entity
 public class Bill {
 
 	@Id
 	@GeneratedValue
 	private long billNo;
-	private Date date;
 	@ManyToOne
+	@JsonBackReference("bill-customer")
 	private Customer customer;
-	@OneToMany(mappedBy = "bill")
+	@OneToMany(mappedBy = "bill", cascade = CascadeType.ALL, orphanRemoval = true)
+	@JsonManagedReference("billedProduct-bill")
 	private List<BilledProduct> products;
-
+	private String status;
+	private long totalQty;
 	private long total;
+	private Timestamp billingDtTime;
+	private long disTotal;
+	private double discount;
+	private long dueAmt;
+	private long paidAmt;
+	private String paymentM;
 
-	protected Bill() {
+	public Bill() {
 	}
 
-	public Bill(long billNo, Date date, Customer customer, List<BilledProduct> products, long total) {
+	public Bill(Customer customer, String status, long totalQty, long total, Timestamp billingDtTime) {
 		super();
-		this.billNo = billNo;
-		this.date = date;
 		this.customer = customer;
-		this.products = products;
+		this.status = status;
+		this.totalQty = totalQty;
 		this.total = total;
+		this.billingDtTime = billingDtTime;
 	}
 
 	public long getBillNo() {
@@ -41,14 +55,6 @@ public class Bill {
 
 	public void setBillNo(long billNo) {
 		this.billNo = billNo;
-	}
-
-	public Date getDate() {
-		return date;
-	}
-
-	public void setDate(Date date) {
-		this.date = date;
 	}
 
 	public Customer getCustomer() {
@@ -77,8 +83,8 @@ public class Bill {
 
 	@Override
 	public String toString() {
-		return "Bill [billNo=" + billNo + ", date=" + date + ", customer=" + customer + ", productIds=" + products
-				+ ", total=" + total + "]";
+		return "Bill [billNo=" + billNo + ", billingDtTime=" + billingDtTime + ", customer=" + customer
+				+ ", productIds=" + products + ", total=" + total + "]";
 	}
 
 }
